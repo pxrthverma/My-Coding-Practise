@@ -1,0 +1,23 @@
+https://www.codingninjas.com/codestudio/problems/middle-of-linked-list_973250
+int findLength(Node* &head)
+{
+    int count = 1;
+    Node* temp=head;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+        count++;
+    }
+    return count;
+}
+
+Node *findMiddle(Node *head) {
+    int mid = findLength(head)/2;
+    Node* temp = head;
+    for(int i=0;i<mid;i++)
+    {
+        temp=temp->next;
+    }
+    
+    return temp;
+}

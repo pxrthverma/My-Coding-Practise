@@ -1,0 +1,53 @@
+https://www.codingninjas.com/codestudio/problems/implement-stack-with-linked-list_630475
+class Stack
+{
+public:
+    
+    Node* top;
+    int size;
+    Stack()
+    {
+        top=NULL;
+        size=0;
+    }
+
+    int getSize()
+    {
+        return size;
+    }
+
+    bool isEmpty()
+    {
+        if(size<=0)
+            return true;
+        else
+            return false;
+    }
+
+    void push(int data)
+    {
+        Node* newnode = new Node(data);
+        newnode->next=top;
+        top=newnode;
+        size++;
+    }
+
+    void pop()
+    {
+        if(size>0)
+        {
+            Node*temp=top;
+            top=top->next;
+            delete(temp);
+            size--;
+        }
+    }
+
+    int getTop()
+    {
+        if(top==NULL)
+            return -1;
+        
+        return top->data;
+    }
+};

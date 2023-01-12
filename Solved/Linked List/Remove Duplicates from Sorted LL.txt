@@ -1,0 +1,26 @@
+https://www.codingninjas.com/codestudio/problems/unique-sorted-list_2420283
+
+
+Node * uniqueSortedList(Node * head) {
+    if(head==NULL || head->next==NULL)
+    {
+        return head;
+    }
+    
+    Node* temp = head;
+    
+    while(temp->next!=NULL)
+    {
+        if(temp->data==temp->next->data)
+        {
+            Node* tbd = temp->next;
+            temp->next=temp->next->next;
+            delete tbd; 
+        }
+        else
+        {
+            temp=temp->next;
+        }
+    }
+    return head;
+}

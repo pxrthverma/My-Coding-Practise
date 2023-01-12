@@ -1,0 +1,60 @@
+https://www.codingninjas.com/codestudio/problems/interview-shuriken-42-detect-and-remove-loop_241049
+Node* floydAlgo(Node* head)
+{
+    if(head==NULL)
+    {
+        return NULL;
+    }
+
+    Node* fast = head;
+    Node* slow = head;
+
+    while(slow!=NULL && fast!=NULL)
+    {
+        fast = fast->next;
+        if(fast!=NULL)
+        {
+            fast=fast->next;
+        }
+
+        slow=slow->next;
+
+        if(slow==fast)
+        {
+            return slow;
+        }
+    }
+    return NULL;
+}
+
+Node *removeLoop(Node *head)
+{
+    if(head==NULL || head->next==NULL)
+    {
+        return head;
+    }
+
+    Node* fast = floydAlgo(head);
+    Node* slow=head; 
+    Node*temp=head;
+    
+    if(fast==NULL)
+    {
+        return head;
+    }
+    
+    while(temp->next!=fast)
+    {
+        temp=temp->next;
+    }
+    
+    while(slow!=fast)
+    {
+        slow=slow->next;
+        fast=fast->next;
+        temp=temp->next;
+    }
+    temp->next=NULL;
+   
+    return head;
+}

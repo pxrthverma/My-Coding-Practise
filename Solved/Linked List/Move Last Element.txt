@@ -1,0 +1,22 @@
+https://www.codingninjas.com/codestudio/problems/let-last-be-the-first_920455
+LinkedListNode<int>* moveToFront(LinkedListNode<int> *head) {
+    if(head==NULL || head->next==NULL)
+    {
+        return head;
+    }
+    
+    LinkedListNode<int>* tail =head;
+    LinkedListNode<int>* temp =NULL;
+    while(tail->next!=NULL)
+    {
+        temp = tail;
+        tail=tail->next;
+    }
+    
+    tail->next = head;
+    head = tail;
+    temp->next=NULL;
+    return head;
+    
+    
+}
