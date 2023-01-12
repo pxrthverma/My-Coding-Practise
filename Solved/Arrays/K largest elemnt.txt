@@ -1,0 +1,12 @@
+https://www.codingninjas.com/codestudio/problems/k-largest-element_1062624
+#include <bits/stdc++.h> 
+vector<int> Klargest(vector<int> &a, int k, int n) {
+    sort(a.begin(),a.end(),greater<int>());
+    vector<int>ans;
+    for(int i=0;i<k;i++)
+    {
+        ans.push_back(a[i]);
+    }
+    sort(ans.begin(),ans.end());
+    return ans;
+}
