@@ -1,3 +1,4 @@
+https://practice.geeksforgeeks.org/problems/queue-reversal/1
 void reverse(queue<int>&q)
 {
     if(q.empty())
