@@ -1,0 +1,59 @@
+https://www.codingninjas.com/codestudio/problems/count-triplets-in-a-sorted-doubly-linked-list-whose-sum-is-equal-to-a-given-value-x_985286
+#include <bits/stdc++.h> 
+/***********************************************
+
+    Following is the class structure of the Node class:
+
+    class DLLNode
+    {
+        public:
+        int data;
+        DLLNode *next;
+        DLLNode *prev;
+    };
+
+***********************************************/
+
+int countTriplets(DLLNode* head, int target)
+{
+    DLLNode*temp=head;
+    DLLNode*start=temp->next;
+    DLLNode*end=start->next;
+    DLLNode*tail=end;
+    int count=0;
+    
+    //Finding the end of LL
+    while(tail->next!=NULL)
+    {
+        tail=tail->next;
+    }
+    end=tail;
+    
+    if(start->data+temp->data+end->data==target)
+        count++;
+    
+    while(temp->next->next!=tail)
+    {
+        int x=temp->data;
+        int sum=target-x;
+        
+        while(start!=end)
+        {
+            if(start->data+end->data==sum)
+            {
+                start=start->next;
+                count++;
+            }
+            else if(start->data+end->data>sum)
+                end=end->prev;
+            else
+                start=start->next;
+        }
+        
+        temp=temp->next;
+        start=temp->next;
+        end=tail;
+    }
+    
+    return count;
+}  
