@@ -1,0 +1,45 @@
+https://www.codingninjas.com/codestudio/problems/aggressive-cows_1082559
+bool isPossible(vector<int> &arr, int mid, int k, int n)
+{
+    int count=1, pos1=arr[0], pos2=arr[0];
+    
+    for(int i=0;i<n;i++)
+    {
+        pos2=arr[i];
+        int dist = abs(pos1-pos2);
+        if(dist>=mid)
+        {
+            count++;
+            
+            if(count==k)
+                return true;
+            
+            pos1=arr[i];
+        }
+    }
+    
+    return false;
+}
+
+int aggressiveCows(vector<int> &stalls, int k)
+{
+    int ans=-1,n=stalls.size();
+    sort(stalls.begin(),stalls.end());
+    int s=0,e=stalls[n-1]-stalls[0];
+    
+    while(s<=e)
+    {
+        int mid=s+(e-s)/2;
+        
+        if(isPossible(stalls,mid,k,n))
+        {
+            ans=mid;
+            s=mid+1;
+        }
+        
+        else
+            e=mid-1;
+    }
+    
+    return ans;
+}

@@ -1,0 +1,47 @@
+https://www.codingninjas.com/codestudio/problems/painter-s-partition-problem_1089557
+bool isPossible(vector<int> &arr, int k, int x)
+{
+    int sum=0,count=1;
+    int n=arr.size();
+    
+    for(int i=0;i<n;i++)
+    {
+        if(sum+arr[i]<=x)
+            sum+=arr[i];
+        
+        else
+        {
+            count++;
+            if(count>k || arr[i]>x)
+                return false;
+            
+            sum=arr[i];
+        }
+    }
+    
+    return true;
+
+}
+
+int findLargestMinDistance(vector<int> &arr, int k)
+{
+    int s=0,e=accumulate(arr.begin(),arr.end(),0);
+    
+    int ans = -1;
+    while(s<=e)
+    {
+        int mid=s+(e-s)/2;
+        if(isPossible(arr,k,mid))
+        {
+            ans = mid;
+            e=mid-1;
+        }
+        
+        else
+        {
+            s=mid+1;
+        }
+    }
+    
+    return ans;
+}

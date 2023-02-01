@@ -1,0 +1,24 @@
+https://www.codingninjas.com/codestudio/problems/binary-search_972
+int solve(int *input, int n, int val, int s, int e)
+{
+    if(s<=e)
+    {
+        int mid = s + (e-s)/2;
+        
+        if(input[mid]==val)
+            return mid;
+        
+        else if(input[mid]>val)
+            return solve(input,n,val,s,mid-1);
+        
+        else 
+            return solve(input,n,val,mid+1,e);
+     }
+    
+    return -1;
+}
+
+int binarySearch(int *input, int n, int val)
+{
+    return solve(input,n,val,0,n-1);   
+}
