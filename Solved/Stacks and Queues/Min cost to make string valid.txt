@@ -1,0 +1,36 @@
+https://www.codingninjas.com/codestudio/problems/minimum-cost-to-make-string-valid_1115770
+#include <bits/stdc++.h> 
+int findMinimumCost(string str) {
+  stack<char>s1;
+    
+    for(int i=0;i<str.length();i++)
+    {
+        if(str[i]=='}' && !s1.empty() && s1.top()=='{')
+            s1.pop();
+        
+        else
+            s1.push(str[i]);
+    }
+    int num = s1.size();
+    int res=0;
+    
+    if(num%2==1)
+        return -1;
+   
+    //a is number of opening braces
+    //b is number of closed braces
+    int a=0,b=0;
+    while(!s1.empty())
+    {
+        if(s1.top()=='{')
+            a++;
+        else
+            b++;
+        
+        s1.pop();
+    }
+    a=(a+1)/2;
+    b=(b+1)/2;
+    res=a+b;
+    return res;
+}
