@@ -1,0 +1,19 @@
+https://www.codingninjas.com/codestudio/problems/reverse-the-string_799927
+#include <bits/stdc++.h> 
+string s1="";
+void solve(int i, int j, string &str)
+{    
+    if(i>j)
+        return;
+    
+    swap(str[i],str[j]);
+    solve(i+1,j-1,str);
+    
+}
+
+string reverseString(string str)
+{
+	int n = str.length();
+    solve(0,str.length()-1,str);
+    return str;
+}
