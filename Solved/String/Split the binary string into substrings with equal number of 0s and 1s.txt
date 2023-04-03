@@ -1,0 +1,49 @@
+https://practice.geeksforgeeks.org/problems/split-the-binary-string-into-substrings-with-equal-number-of-0s-and-1s/1
+
+//{ Driver Code Starts
+/* Driver program to test above function */
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+public:
+    int maxSubStr(string str){
+        int ans=0;
+        int zeroCount=0,oneCount=0;
+        for(int i=0;i<str.length();i++)
+        {
+            if(str[i]=='1')oneCount++;
+            else if(str[i]=='0') zeroCount++;
+            
+            if(oneCount==zeroCount)
+            ans++;
+        }
+        
+        if(oneCount!=zeroCount)return -1;
+        
+        if(ans>0)
+        return ans;
+        else return -1;
+    }
+};
+
+
+//{ Driver Code Starts.
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string str;
+	    cin >> str;
+	    Solution ob;
+	    int ans = ob.maxSubStr(str);
+	    cout << ans<<endl;
+	}
+	return 0;
+}
+
+// } Driver Code Ends
