@@ -1,0 +1,39 @@
+https://www.codingninjas.com/codestudio/problems/dfs-traversal_630462
+
+void dfs(int vertex, vector<int>&subArray, 
+        unordered_set<int>&visited, unordered_map<int, vector<int>>adjList)
+{
+    visited.insert(vertex);
+    subArray.push_back(vertex);
+    for(int i=0;i<adjList[vertex].size(); i++)
+    {
+        if(!visited.count(adjList[vertex][i]))
+        dfs(adjList[vertex][i], subArray, visited, adjList);
+    }
+}
+
+vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
+{
+    unordered_map<int, vector<int>>adjList;
+    
+    for(auto i:edges)
+    {
+        adjList[i[0]].push_back(i[1]);
+        adjList[i[1]].push_back(i[0]);
+    }
+
+    unordered_set<int>visited;
+    vector<vector<int>>ans;
+    int count=-1;
+    for(int i=0;i<V;i++)
+    {
+        vector<int>subArray;
+        if(!visited.count(i))
+        {
+            dfs(i, subArray, visited, adjList);
+            ans.push_back(subArray);
+        }
+        count++;
+    }
+    return ans;
+}
