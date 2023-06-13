@@ -1,0 +1,56 @@
+https://www.codingninjas.com/codestudio/problems/shortest-path-in-an-unweighted-graph_981297?leftPanelTab=1&utm_source=youtube&utm_medium=affiliate&utm_campaign=Lovebabbar
+
+#include<unordered_map>
+#include<queue>
+#include<vector>
+
+
+
+vector<int> shortestPath( vector<pair<int,int>> edges , int n , int m, int s , int t){
+	
+	//n=noodes
+	//m=edges
+
+
+	unordered_map<int, vector<int>>adj;
+	vector<int>parent(n+1,0);
+	vector<int>ans;
+	vector<int>visited(n+1,0);
+	queue<int>q1;
+
+	for(auto i:edges)
+	{
+		adj[i.first].push_back(i.second);
+		adj[i.second].push_back(i.first);
+	}
+
+	parent[s]=-1;
+	q1.push(s);
+	visited[s]=1;
+
+	while(!q1.empty())
+	{
+		int num=q1.front();
+		q1.pop();
+
+		for(auto i:adj[num])
+		{
+			if(visited[i]==0)
+			{
+				parent[i]=num;
+				visited[i]=1;
+				q1.push(i);
+			}
+		} 
+	}
+
+	int i=t;
+	
+	while(i!=-1)
+	{
+		ans.insert(ans.begin()+0,i);
+		i=parent[i];
+	}
+
+	return ans;
+}

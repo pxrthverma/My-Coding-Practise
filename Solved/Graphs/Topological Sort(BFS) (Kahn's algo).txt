@@ -1,0 +1,44 @@
+https://www.codingninjas.com/codestudio/problems/topological-sort_982938?topList=love-babbar-dsa-sheet-problems&leftPanelTab=1&utm_source=youtube&utm_medium=affiliate&utm_campaign=Lovebabbar
+
+#include <bits/stdc++.h> 
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+        
+        unordered_map<int,vector<int>>adj;
+        vector<int>ans;
+	    vector<int>indeg(v,0);
+	    queue<int>q1;
+	    
+	    //filling indegree array
+	    for(auto i:edges)
+	    {
+            int u=i[0],v=i[1];
+            adj[u].push_back(v);
+	        indeg[v]++;
+	    }
+	    
+	    //finding nodes with 0 indegree
+	    
+	    for(int i=0;i<v;i++)
+	    {
+	        if(indeg[i]==0)
+	        q1.push(i);
+	    }
+	    
+	    //BFS
+	    while(!q1.empty())
+	    {
+	        int num = q1.front();
+	        q1.pop();
+	        ans.push_back(num);
+	        
+	        for(auto i:adj[num])
+	        {
+	            indeg[i]--;
+	            
+	            if(indeg[i]==0)
+	            q1.push(i);
+	        }
+	    }
+	    
+	    return ans; 
+}

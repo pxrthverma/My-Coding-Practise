@@ -1,0 +1,42 @@
+https://practice.geeksforgeeks.org/problems/topological-sort/1
+
+class Solution
+{
+	public:
+	
+	void dfs(int node, vector<int> adj[], vector<int>&v, stack<int>&s1)
+    {
+        v[node]=1;
+        
+        for(auto i:adj[node])
+        {
+            if(!v[i])
+            dfs(i,adj,v,s1);
+        }
+        s1.push(node);
+    }
+	
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    
+	    stack<int>s1;
+	    vector<int>v1(V,0);
+	    
+	    vector<int>ans;
+	    
+	    for(int i=0;i<V;i++)
+        {
+            if(!v1[i]==1)
+            dfs(i,adj,v1,s1);
+        }
+        
+        while(!s1.empty())
+        {
+            ans.push_back(s1.top());
+            s1.pop();
+        }
+        
+        return ans;
+	}
+};
