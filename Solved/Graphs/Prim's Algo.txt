@@ -1,0 +1,86 @@
+https://www.codingninjas.com/codestudio/problems/prim-s-mst_1095633?topList=love-babbar-dsa-sheet-problems&leftPanelTab=1&utm_source=youtube&utm_medium=affiliate&utm_campaign=Lovebabbar
+
+#include <bits/stdc++.h> 
+#include <unordered_map>
+#include <unordered_set>
+#include <map>
+#include <set>
+
+vector<pair<pair<int, int>, int>> calculatePrimsMST(int n, int m, vector<pair<pair<int, int>, int>> &graph)
+{
+    unordered_map<int,vector<pair<int,int>>>m1;
+        
+        for(auto i:graph)
+        {
+            int u=i.first.first,v=i.first.second,w=i.second;
+            m1[u].push_back({v,w});
+            m1[v].push_back({u,w});
+        }
+            
+        vector<int>key(n+1,INT_MAX);
+        vector<bool>mst(n+1,0);
+        vector<int>parent(n+1,-1);
+
+        key[1]=0;
+        vector<pair<pair<int, int>, int>>ans; 
+        
+        for(int curr=1;curr<=n;curr++)
+        {
+            //extract min edge
+            int mini = INT_MAX;
+            int node;
+            for(int i=1; i<n+1; i++)
+            {
+                if(!mst[i])
+                {
+                    if(key[i] < mini)
+                    {
+                        mini=key[i];
+                        node = i;
+                    }
+                }
+            }
+
+            //mark true in mst
+            mst[node]=1;
+
+            //finding adjacent nodes
+
+            for(auto i:m1[node])
+            {
+                int val = i.second;
+                int neighbour = i.first;
+
+                if(val<key[neighbour] && !mst[neighbour])
+                {
+                    key[neighbour]=val;
+                    parent[neighbour]=node;
+                }
+            }            
+        }
+        
+        for(int i=2;i<=n;i++)
+        {
+            ans.push_back({{parent[i],i},key[i]});
+        }
+
+        
+        return ans;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

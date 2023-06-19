@@ -1,0 +1,84 @@
+https://www.codingninjas.com/codestudio/problems/count-strongly-connected-components-kosaraju-s-algorithm_1171151?leftPanelTab=1&utm_source=youtube&utm_medium=affiliate&utm_campaign=Lovebabbar
+
+#include <unordered_map>
+#include <stack>
+void dfs(int node, vector<bool>&visited, unordered_map<int,vector<int>>&adj, 
+			stack<int>&s1)
+	{
+		visited[node]=1;
+
+		for(auto i:adj[node])
+		{
+			if(!visited[i])
+			dfs(i, visited, adj, s1);
+		}
+
+		s1.push(node);
+	}
+
+void dfs1(int node, vector<bool>&visited1, unordered_map<int,vector<int>>&adj1)
+{
+		visited1[node]=1;
+
+		for(auto i:adj1[node])
+		{
+			if(!visited1[i])
+			dfs1(i, visited1, adj1);
+		}
+}
+
+int stronglyConnectedComponents(int v, vector<vector<int>> &edges)
+{
+	unordered_map<int,vector<int>>adj;
+
+	//adj list creation
+	for(auto i:edges)
+	adj[i[0]].push_back(i[1]);
+
+	stack<int>s1;
+	vector<bool>visited(v,0);
+
+	//topological sort by dfs
+	for(int i=0;i<v;i++)
+	{
+		if(!visited[i])
+		dfs(i, visited, adj, s1);
+	}
+
+	vector<bool>visited1(v,0);
+	
+	//invert edges
+	unordered_map<int,vector<int>>adj1;
+
+	for(auto i:adj)
+	{
+		for(auto j:i.second)
+		adj1[j].push_back(i.first);
+	}
+
+	int scc=0;
+
+	//counting ssc
+	while(!s1.empty())
+	{
+		int node = s1.top();
+		s1.pop();
+
+		if(!visited1[node])
+		{
+			scc++;
+			dfs1(node, visited1, adj1);
+		}
+	}
+
+	return scc;
+}
+
+
+
+
+
+
+
+
+
