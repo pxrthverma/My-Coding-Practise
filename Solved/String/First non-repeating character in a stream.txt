@@ -1,0 +1,63 @@
+https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1
+
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+	public:
+		string FirstNonRepeating(string A){
+		    string res = "";
+		    vector<int>s1(26,0);
+		    queue<char>q1;
+		    
+		    for(auto i:A)
+		    {
+		        if(!q1.empty() && i==q1.front() )
+		        q1.pop();
+		        
+		        if(s1[i-'a']>0)
+		        {
+		            while(!q1.empty() && s1[q1.front()-'a']>1)
+		            q1.pop();
+		            
+		            if(!q1.empty())
+		            res+=q1.front();
+		            
+		            else
+		            res+="#";
+		        }
+		        
+		        else
+		        {
+		            q1.push(i);
+		            
+		            if(!q1.empty())
+		            res+=q1.front();
+		            
+		            else
+		            res+=i;
+		        }
+		        
+		        s1[i-'a']++;
+		    }
+		    return res;
+		}
+
+};
+
+//{ Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		string A;
+		cin >> A;
+		Solution obj;
+		string ans = obj.FirstNonRepeating(A);
+		cout << ans << "\n";
+	}
+	return 0;
+}
+// } Driver Code Ends
